@@ -1,9 +1,9 @@
-function ProductImg({ images }){
+function ProductImg({ images, name }){
   function getImg(){
-    if(window.innerWidth < 768){
+    if(window.innerWidth < 1024){
       return images.mobile;
     }
-    else if(window.innerWidth >= 768 && window.innerWidth <= 1440){
+    else if(window.innerWidth >= 1024 && window.innerWidth <= 1440){
       return images.tablet;
     }
     else{
@@ -13,7 +13,7 @@ function ProductImg({ images }){
   }
 
   return(
-    <img className='w-full object-cover object-center rounded-[10px] lg:h-full' src={getImg()}></img>
+    <img className='w-full object-cover object-center rounded-[10px] lg:h-full' src={getImg()} alt={'Image of ' + name}></img>
   );
 }
 

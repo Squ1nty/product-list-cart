@@ -29,7 +29,7 @@ function ProductGrid(){
   }, []);
 
   return(
-    <div className='grid grid-cols-1 gap-7 w-full h-full bg-yellow-400 md:grid-cols-2 xl:grid-cols-3'>
+    <div className='grid grid-cols-1 gap-7 w-full h-full lg:grid-cols-2 xl:grid-cols-3'>
       {data && data.map(dataItem => (
         <Product key={dataItem.name} name={dataItem.name} category={dataItem.category} price={dataItem.price} imageArray={dataItem.image} />
       ))}
