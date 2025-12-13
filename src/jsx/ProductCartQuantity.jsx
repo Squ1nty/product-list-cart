@@ -1,11 +1,11 @@
-import { useState } from 'react'
-
-function ProductCartQuantity(){
-  let [amount, setAmount] = useState(1);
-
+function ProductCartQuantity({amount, setAmount, setState}){
   function handleDecrement(){
     if(amount !== 1){
       setAmount(amount - 1);
+    }
+    else if(amount === 1){
+      setState(false);
+      console.log("poop");
     }
   }
   function handleIncrement(){

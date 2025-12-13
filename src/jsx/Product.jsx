@@ -6,18 +6,15 @@ import ProductCartQuantity from './ProductCartQuantity';
 
 function Product({ name, category, price, imageArray }){
 
-  const [ isActive, setState ] = useState(false);
-
-  function handleClick(){
-    setState(true);
-  }
+  let [isActive, setState] = useState(false);
+  let [amount, setAmount] = useState(1);
 
   return(
   <div className='w-full h-full flex flex-col gap-10'>
     <div className='relative'>
       <ProductImg images={imageArray} name={name} />
-      <div className='addToCartBtn absolute -bottom-5 left-[20%] right-[20%] cursor-pointer outline-none [ hover:border-[var(--red)] focus:border-[var(--red)] transition-colors duration-150 ]' onClick={handleClick} tabIndex={0}>
-        {isActive ? <ProductCartQuantity /> : <AddToCartBtn />}
+      <div className='addToCartBtn absolute -bottom-5 left-[18%] right-[18%] cursor-pointer outline-none [ hover:border-[var(--red)] focus:border-[var(--red)] transition-colors duration-150 ]' tabIndex={0}>
+        {isActive ? <ProductCartQuantity amount={amount} setAmount={setAmount} setState={setState} /> : <AddToCartBtn setState={setState} />}
       </div>
     </div>
     <div className='flex flex-col'>
