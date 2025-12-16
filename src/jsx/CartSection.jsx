@@ -4,7 +4,7 @@ import EmptyCart from './EmptyCart';
 
 function CartSection(){
   let [cartCount, setCartCount] = useState(0);
-  let [isEmpty, setState] = useState(true);
+  let [isEmpty, setState] = useState(false); // Remember to set this to "true"
 
   return(
     <section className='flex flex-col h-fit w-full p-6 bg-white rounded-[10px] md:col-start-3 md:col-end-4'>
