@@ -1,6 +1,6 @@
-function AddToCartBtn({setState}){
+function AddToCartBtn({ index, updateState }){
   function handleClick(){
-    setState(true);
+    updateState(index, true);
   }
   return(
     <div onClick={handleClick}>
