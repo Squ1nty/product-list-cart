@@ -1,8 +1,5 @@
 function ProductCartQuantity({ index, updateState, amount, updateAmount }){
   let currentAmount;
-  if(amount === 0){
-    currentAmount = 1;
-  }
   if(amount > 0){
     currentAmount = amount;
   }
@@ -13,8 +10,11 @@ function ProductCartQuantity({ index, updateState, amount, updateAmount }){
       updateAmount(index, currentAmount);
     }
     else if(currentAmount === 1){
+      console.log("Entered Decrement");
       updateState(index, false);
+      console.log("State Passed")
       updateAmount(index, 0);
+      console.log("Amount Passed")
     }
   }
   function handleIncrement(){
