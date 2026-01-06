@@ -63,13 +63,7 @@ function Project(){
   }
 
   useEffect(() => {
-    console.log(cartArray);
-  }, [cartArray]);
-
-  useEffect(() => {
-    console.log(data);
-    let cartTempArray = [];
-
+    let cartTempArray = []
     function isAlreadyInCart(dataItem){
       if(cartArray.length === 0 || cartArray.length === undefined){
         return false;
@@ -85,7 +79,6 @@ function Project(){
     if(data){
       data.map(dataItem => {
         if(!isAlreadyInCart(dataItem) && dataItem.isActive){
-          console.log("Entered 1st Condition");
           setCart(existingCart => {
             cartTempArray = [...existingCart];
             cartTempArray.push(dataItem);
@@ -93,7 +86,7 @@ function Project(){
           });
         }
         else if(isAlreadyInCart(dataItem) && dataItem.isActive){ // Create condition for already in cart
-          console.log("Entered 2nd Condition");
+
           setCart(existingCart => {
             cartTempArray = [...existingCart];
             cartTempArray.map(cartItem => {
@@ -102,10 +95,10 @@ function Project(){
               }
             });
             return cartTempArray;
+            
           });
         }
         else if(isAlreadyInCart(dataItem) && !dataItem.isActive){ // Create condition for dataItem now being !isActive
-          console.log("Entered 3rd Condition");
           setCart(existingCart => {
             cartTempArray = [...existingCart];
             let dataItemName = dataItem.name;
@@ -128,7 +121,7 @@ function Project(){
           ))}
         </div>
       </section>
-      <CartSection/>
+      <CartSection cartArray={cartArray} />
     </div>
   );
 }
