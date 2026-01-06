@@ -5,6 +5,7 @@ import EmptyCart from './EmptyCart';
 function CartSection({ cartArray }){
   let [cartCount, setCartCount] = useState(0);
   let [isEmpty, setState] = useState(true); // Remember to set this to "true"
+  let cartCounter = 0;
 
   useEffect(() => {
     if(cartArray.length === 0 || cartArray.length === undefined){
@@ -14,7 +15,10 @@ function CartSection({ cartArray }){
       setState(false);
     }
 
-    setCartCount(cartArray.length);
+    cartArray.forEach(cartItem => {
+      cartCounter += cartItem.amount;
+    });
+    setCartCount(cartCounter)
   }, [cartArray]);
 
   return(
