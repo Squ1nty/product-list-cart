@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import CartItem from './CartItem';
 
-function ActiveCart({ cartArray }){
+function ActiveCart({ cartArray, deleteCartItem }){
   let [totalPrice, setTotal] = useState(0);
   let itemTotal = 0;
 
@@ -19,7 +19,7 @@ function ActiveCart({ cartArray }){
     <div>
       <section className='flex flex-col w-full'>
         {cartArray && cartArray.map(cartItem => (
-          <CartItem key={cartItem.name} itemName={cartItem.name} itemPrice={cartItem.price} itemAmount={cartItem.amount} />
+          <CartItem key={cartItem.name} itemName={cartItem.name} itemPrice={cartItem.price} itemAmount={cartItem.amount} deleteCartItem={deleteCartItem} />
         ))}
       </section>
       <section className='flex flex-col gap-5 mt-3'>

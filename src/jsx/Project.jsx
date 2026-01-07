@@ -7,6 +7,9 @@ function Project(){
   let [dataStateArray, setState] = useState([]);
   let [dataQuantityArray, setQuantity] = useState([]);
   let [cartArray, setCart] = useState([]);
+  let [cartCount, setCartCount] = useState(0);
+  let [isEmpty, setProductState] = useState(true); // Remember to set this to "true"
+  let cartCounter = 0;
 
   useEffect(() => { // Pulls the data.json data and stores it as an object array, it then initialises the dataStateArray to a length of 9 and set all to false by default
     async function fetchData(){
@@ -47,7 +50,6 @@ function Project(){
       return newData;
     });
   }
-
   function updateState(index, newState){
     if(newState === true){
       updateAmount(index, 1);
@@ -60,6 +62,25 @@ function Project(){
       };
       return newData;
     });
+  }
+  function deleteCartItem(itemName){
+    let index;
+    /* 
+
+      On click, .pop(), call updateState and updateAmount, boom and done
+
+    */
+    data.forEach(cartItem => {
+      if(cartItem.name === itemName){
+        index = data.indexOf(cartItem);
+      }
+    });
+    console.log(itemName + " " + index);
+    let newArray = cartArray.filter(cartItem => cartItem.name !== itemName);
+    console.log(newArray);
+    setCart(newArray);
+    updateAmount(index, 0);
+    updateState(index, false);
   }
 
   useEffect(() => {
@@ -111,6 +132,20 @@ function Project(){
     }
   }, [data]);
 
+  useEffect(() => {
+    if(cartArray.length === 0 || cartArray.length === undefined){
+      setProductState(true);
+    }
+    else{
+      setProductState(false);
+    }
+
+    cartArray.forEach(cartItem => {
+      cartCounter += cartItem.amount;
+    });
+    setCartCount(cartCounter)
+  }, [cartArray]);
+
   return(
     <div className='flex flex-col gap-7 w-full py-8 px-6 md:p-24 md:grid md:grid-cols-3'>
       <section className='flex flex-col gap-10 md:col-start-1 md:col-end-3'>
@@ -121,7 +156,7 @@ function Project(){
           ))}
         </div>
       </section>
-      <CartSection cartArray={cartArray} />
+      <CartSection cartArray={cartArray} deleteCartItem={deleteCartItem} cartCount={cartCount} isEmpty={isEmpty} />
     </div>
   );
 }
