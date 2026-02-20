@@ -1,4 +1,4 @@
-function ProductImg({ images, name }){
+function ProductImg({ images, name, isActive }){ 
   function getImg(){
     if(window.innerWidth < 1024){
       return images.mobile;
@@ -13,7 +13,7 @@ function ProductImg({ images, name }){
   }
 
   return(
-    <img className='w-full object-cover object-center rounded-[10px] lg:h-full' src={getImg()} alt={'Image of ' + name}></img>
+    <img className={` ${ isActive ? "border-solid" : "border-transparent"} w-full object-cover object-center border-[2px] border-[var(--red)] rounded-[10px] transition-all duration-150 lg:h-full`} src={getImg()} alt={'Image of ' + name}></img>
   );
 }
 

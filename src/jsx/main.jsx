@@ -6,5 +6,5 @@ import App from './App.jsx'
 createRoot(document.getElementById('root')).render(
   //<StrictMode>
     <App />
-  //</StrictMode>, ADD THIS BACK WHEN DONE!!!!!!!
+  //</StrictMode>, //ADD THIS BACK WHEN DONE!!!!!!!
 )

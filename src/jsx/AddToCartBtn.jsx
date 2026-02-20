@@ -1,14 +1,14 @@
-function AddToCartBtn({ index, updateState }){
+function AddToCartBtn({ index, ref, updateState }){
   function handleClick(){
     updateState(index, true);
   }
   return(
-    <div onClick={handleClick}>
-      <div className='flex group items-center justify-center gap-2 bg-white px-6 py-3 rounded-[30px] border-[1px] border-[var(--rose-300)] w-full h-full'>
+    <>
+      <button onClick={handleClick} ref={ref} className='flex group items-center justify-center gap-2 bg-white px-6 py-3 rounded-[30px] border-[1px] border-[var(--rose-300)] w-full h-full outline-none'>
         <img src="/images/icon-add-to-cart.svg" alt='Cart icon'></img>
         <p className='text-sm font-[600] text-[var(--rose-900)] outline-none [ group-hover:text-[var(--red)] group-focus:text-[var(--red)] transition-colors duration-150 ]'>Add to Cart</p>
-      </div>
-    </div>
+      </button>
+    </>
   );
 }
 

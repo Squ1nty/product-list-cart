@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Product from './Product';
 import CartSection from './CartSection';
+import OrderConfirmation from './OrderConfirmation';
 
 function Project(){
   let [data, setData] = useState(null);
@@ -9,6 +10,7 @@ function Project(){
   let [cartArray, setCart] = useState([]);
   let [cartCount, setCartCount] = useState(0);
   let [isEmpty, setProductState] = useState(true); // Remember to set this to "true"
+  let [isConfirmed, setConfirmationState] = useState(false);
   let cartCounter = 0;
 
   useEffect(() => { // Pulls the data.json data and stores it as an object array, it then initialises the dataStateArray to a length of 9 and set all to false by default
@@ -75,9 +77,7 @@ function Project(){
         index = data.indexOf(cartItem);
       }
     });
-    console.log(itemName + " " + index);
     let newArray = cartArray.filter(cartItem => cartItem.name !== itemName);
-    console.log(newArray);
     setCart(newArray);
     updateAmount(index, 0);
     updateState(index, false);
@@ -147,17 +147,20 @@ function Project(){
   }, [cartArray]);
 
   return(
-    <div className='flex flex-col gap-7 w-full py-8 px-6 md:p-24 md:grid md:grid-cols-3'>
-      <section className='flex flex-col gap-10 md:col-start-1 md:col-end-3'>
-        <div><h1 className='text-[var(--rose-900)] text-4xl font-[700] lg:text-5xl'>Desserts</h1></div>
-        <div className='grid grid-cols-1 gap-7 w-full h-full lg:grid-cols-2 xl:grid-cols-3'>
-          {data && data.map((dataItem, index) => (
-            <Product key={index} index={index} name={dataItem.name} category={dataItem.category} price={dataItem.price} imageArray={dataItem.image} isActive={dataItem.isActive} updateState={updateState} amount={dataItem.amount} updateAmount={updateAmount} />
-          ))}
-        </div>
-      </section>
-      <CartSection cartArray={cartArray} deleteCartItem={deleteCartItem} cartCount={cartCount} isEmpty={isEmpty} />
-    </div>
+    <>
+      {isConfirmed ? <OrderConfirmation cartArray={cartArray} deleteCartItem={deleteCartItem} /> : null}
+      <div className='flex flex-col gap-7 w-full py-6 px-6 lg:py-24 lg:px-16 lg:grid lg:grid-cols-3'>
+        <section className='flex flex-col gap-10 md:col-start-1 md:col-end-3'>
+          <div><h1 className='text-[var(--rose-900)] text-4xl font-[700] lg:text-5xl'>Desserts</h1></div>
+          <div className='grid grid-cols-1 gap-7 w-full h-full md:grid-cols-2 xl:grid-cols-3'>
+            {data && data.map((dataItem, index) => (
+              <Product key={index} index={index} name={dataItem.name} category={dataItem.category} price={dataItem.price} imageArray={dataItem.image} isActive={dataItem.isActive} updateState={updateState} amount={dataItem.amount} updateAmount={updateAmount} />
+            ))}
+          </div>
+        </section>
+        <CartSection isConfirmed={isConfirmed} setConfirmationState={setConfirmationState} cartArray={cartArray} deleteCartItem={deleteCartItem} cartCount={cartCount} isEmpty={isEmpty} />
+      </div>
+    </>
   );
 }
 export default Project
